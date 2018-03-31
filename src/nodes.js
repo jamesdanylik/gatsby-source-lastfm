@@ -1,11 +1,15 @@
 import createNodeHelpers from 'gatsby-node-helpers'
 
-const { createNodeFactory } = createNodeHelpers({
-	typePrefix: `LastFM`
-});
-
-const RecentTrackNode = createNodeFactory('RecentTrack', node => {
-	return node;
+const {
+	createNodeFactory,
+	generateNodeId,
+	generateTypeName,
+} = createNodeHelpers({
+	typePrefix: `Lastfm`,
 })
 
-export { RecentTrackNode }
+
+const LASTFM_TYPE = `Lastfm`
+export const LastfmNode = createNodeFactory(LASTFM_TYPE, node => {
+	return node
+})
