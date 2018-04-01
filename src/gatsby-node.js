@@ -1,4 +1,4 @@
-import {LastfmNode} from './nodes'
+import {RecentTrackNode} from './nodes'
 
 exports.sourceNodes = async({boundActionCreators}) => {
 	const { createNode } = boundActionCreators

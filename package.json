@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-lastfm",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Gatsby source plugin for building websites using Last.FM as a data source",
   "dependencies": {
     "gatsby-node-helpers": "^0.1.3"
