@@ -4,9 +4,9 @@ exports.sourceNodes = async({boundActionCreators}) => {
 	const { createNode } = boundActionCreators
 
 	const recentTracks = [
-		{test: "stuff"},
-		{test: "things"},
-		{test: "also stuff"},
+		{id: 0, test: "stuff"},
+		{id:1, test: "things"},
+		{id:2, test: "also stuff"},
 	]
 
 	recentTracks.forEach(track => {
