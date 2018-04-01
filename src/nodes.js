@@ -9,7 +9,7 @@ const {
 })
 
 
-const LASTFM_TYPE = `Lastfm`
-export const LastfmNode = createNodeFactory(LASTFM_TYPE, node => {
+const RECENTTRACK_TYPE = `Recenttrack`
+export const RecentTrackNode = createNodeFactory(RECENTTRACK_TYPE, node => {
 	return node
 })
