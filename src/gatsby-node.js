@@ -49,9 +49,9 @@ exports.sourceNodes = async({boundActionCreators}, {
 }) => {
 	const { createNode } = boundActionCreators
 
-	console.log('\nStarting LastFM Scrape...')
-	console.log('  api_key=' + api_key)
-	console.log('  username=' + username)
+	//console.log('\nStarting LastFM Scrape...')
+	//console.log('  api_key=' + api_key)
+	//console.log('  username=' + username)
 
 	const response = await api(recentTracksUrl({api_key: api_key, username: username, extended: 1, limit: 200}))
 
@@ -128,22 +128,22 @@ exports.sourceNodes = async({boundActionCreators}, {
 		playbacks.push(playbackNode)
 	})
 
-	console.log(Object.keys(tracks).length + " Tracks")
+	//console.log(Object.keys(tracks).length + " Tracks")
 	for(var key in tracks) {
 		createNode(tracks[key])
 	}
 
-	console.log(Object.keys(albums).length + " Albums")
+	//console.log(Object.keys(albums).length + " Albums")
 	for(var key in albums) {
 		createNode(albums[key])
 	}
 
-	console.log(Object.keys(artists).length + " Artists")
+	//console.log(Object.keys(artists).length + " Artists")
 	for(var key in artists) {
 		createNode(artists[key])
 	}
 
-	console.log(playbacks.length + " Playbacks")
+	//console.log(playbacks.length + " Playbacks")
 	playbacks.forEach(playback => {
 		createNode(playback)
 	})
