@@ -1,5 +1,9 @@
 # gatsby-source-lastfm
 
+[![Build Status](https://travis-ci.org/jamesdanylik/gatsby-source-lastfm.svg?branch=master)](https://travis-ci.org/jamesdanylik/gatsby-source-lastfm)
+[![npm package](https://img.shields.io/npm/v/gatsby-source-lastfm.svg)](https://www.npmjs.org/package/gatsby-source-lastfm)
+[![npm package](https://img.shields.io/npm/dm/gatsby-source-lastfm.svg)](https://npmcharts.com/compare/gatsby-source-lastfm?minimal=true)
+
 This is a source plugin for GatsbyJS to pull information from Last.FM.  Currently, the plugin grabs only the most recent 200 scrobbles for a single Last.fm user. Grabbing more / all scrobbles for a user is currently a work-in-progress; other features added by request.
 
 
