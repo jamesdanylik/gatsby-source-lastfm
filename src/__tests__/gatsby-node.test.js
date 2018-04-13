@@ -1,5 +1,5 @@
 import {
-	recentTracksUlr,
+	recentTracksUrl,
 	api,
 	sourceNodes
 } from "../gatsby-node.js"
