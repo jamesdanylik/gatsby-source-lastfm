@@ -14,12 +14,10 @@ test('sercure environment vairables', () => {
 })
 
 test('basic API response test', () => {
-	const response = await api(recentTracksUrl({
+	expect(api(recentTracksUrl({
 		api_key: process.env.TESTAPIKEY, 
 		username: process.env.TESTUSERNAME, 
 		extended: 1, 
 		limit: 200
-	}))
-	expect(response.hasOwnProperty('recenttracks')).toBe(true)
-	expect(response.recenttracks.hasOwnProperty('track')).toBe(true)
+	}))).resolves.hasOwnProperty('recenttracks').toBe(true)
 }
