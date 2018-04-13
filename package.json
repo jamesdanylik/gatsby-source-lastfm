@@ -12,6 +12,7 @@
     "watch": "babel -w src --out-dir . --ignore __tests__",
     "test": "jest"
   },
+  "setupFiles": ["require('isomorphic-fetch');"],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
