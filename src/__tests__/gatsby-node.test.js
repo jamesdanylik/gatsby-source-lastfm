@@ -16,10 +16,11 @@ test('sercure environment vairables', () => {
 })
 
 test('basic API response test', () => {
-	expect(api(recentTracksUrl({
+	const url = recentTracksUrl({
 		api_key: process.env.TESTAPIKEY, 
 		username: process.env.TESTUSERNAME, 
 		extended: 1, 
 		limit: 200
-	}))).resolves.hasOwnProperty('recenttracks').toBe(true)
+	})
+	expect(api(url)).resolves.hasOwnProperty('recenttracks').toBe(true)
 })
