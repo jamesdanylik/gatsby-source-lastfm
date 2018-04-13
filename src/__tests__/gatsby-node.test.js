@@ -10,7 +10,7 @@ test('always pass', () => {
 
 
 test('sercure environment vairables', () => {
-	expect(process.env.TESTAPIKEY).toBe(expect.anything())
+	expect(process.env.TESTAPIKEY).toEqual(expect.anything())
 })
 
 test('basic API response test', async () => {
