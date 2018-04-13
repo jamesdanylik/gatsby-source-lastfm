@@ -23,7 +23,5 @@ test('basic API response test', async () => {
 		limit: 200
 	})
 	
-	await expect(api(url)).resolves.objectContaining({
-		'recenttracks': expect.anything()
-	})
+	expect(api(url)).resolves.toHaveProperty("recenttracks")
 })
