@@ -15,16 +15,15 @@ test('sercure environment vairables', () => {
 	expect(process.env.TESTVAR).toBe("TESTVAR")
 })
 
-test('basic API response test', () => {
+test('basic API response test', async () => {
 	const url = recentTracksUrl({
 		api_key: process.env.TESTAPIKEY, 
 		username: process.env.TESTUSERNAME, 
 		extended: 1, 
 		limit: 200
 	})
-	expect(api(url)).resolves.objectContaining({
-		'recenttracks': expect.objectContaining({
-			'track': expect.anything()
-		})
+	
+	await expect(api(url)).resolves.objectContaining({
+		'recenttracks': expect.anything()
 	})
 })
