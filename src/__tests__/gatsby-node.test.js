@@ -20,4 +20,4 @@ test('basic API response test', () => {
 		extended: 1, 
 		limit: 200
 	}))).resolves.hasOwnProperty('recenttracks').toBe(true)
-}
+})
