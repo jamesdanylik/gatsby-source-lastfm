@@ -43,6 +43,8 @@ function transformText(orig) {
 	return trans
 }
 
+export {api, recentTracksUrl, transformText}
+
 exports.sourceNodes = async({boundActionCreators}, {
 	api_key,
 	username
