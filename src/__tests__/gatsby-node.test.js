@@ -8,11 +8,9 @@ test('always pass', () => {
 	expect(1).toBe(1)
 })
 
-//TESTAPIKEY
-//TESTUSERNAME
 
 test('sercure environment vairables', () => {
-	expect(process.env.TESTVAR).toBe("TESTVAR")
+	expect(process.env.TESTAPIKEY).anything()
 })
 
 test('basic API response test', async () => {
