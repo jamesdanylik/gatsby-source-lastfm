@@ -7,5 +7,5 @@ test('always pass', () => {
 })
 
 test('sercure environment vairables', () => {
-	expect(process.env.TESTVAR).teBe("TESTVAR")
+	expect(process.env.TESTVAR).toBe("TESTVAR")
 })
