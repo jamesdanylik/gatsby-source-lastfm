@@ -22,5 +22,9 @@ test('basic API response test', () => {
 		extended: 1, 
 		limit: 200
 	})
-	expect(api(url)).resolves.hasOwnProperty('recenttracks').toBe(true)
+	expect(api(url)).resolves.objectContaining({
+		'recenttracks': expect.objectContaining({
+			'track': expect.anything()
+		})
+	})
 })
