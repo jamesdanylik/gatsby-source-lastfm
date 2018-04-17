@@ -9,11 +9,12 @@ test('always pass', () => {
 })
 
 
-test('secure environment vairables', () => {
+test('secure environment variables', () => {
 	expect(process.env.TESTAPIKEY).toEqual(expect.anything())
+	expect(process.env.TESTUSERNAME).toEqual(expect.anything())
 })
 
-test('recentTracks endpoint contains "recenttracks" with "track" prop', async () => {
+test('recentTracks response object contains "recenttracks" with "track"', async () => {
 	const url = recentTracksUrl({
 		api_key: process.env.TESTAPIKEY, 
 		username: process.env.TESTUSERNAME, 

@@ -6,6 +6,8 @@
 
 This is a source plugin for GatsbyJS to pull information from Last.FM.  Currently, the plugin grabs only the most recent 200 scrobbles for a single Last.fm user. Grabbing more / all scrobbles for a user is currently a work-in-progress; other features added by request.
 
+## A Word on Tests
+This plugin is setup for continuous deployment with Travis-CL for testing.  However, I'm still learning the proper way to unit tests GatsbyJS plugins, so my testing mainly focuses on the API side at the moment: we pull from the API, verify the structure hasn't changed, and verify that we parse correctly.  Currently, it is assumed that the GatsbyJS plugin structure hasn't changed; this isn't tested by the suite.
 
 ## Install
 

@@ -63,71 +63,73 @@ exports.sourceNodes = async({boundActionCreators}, {
 	var playbacks = []
 
 	response.recenttracks.track.forEach(track => {
-		const albumUrl = track.artist.url + '/' + encodeURIComponent(track.album['#text'].replace(/ /g, '+'))
-		// CHECK TRACK NODE
-		if( tracks[generateNodeId(TRACK_TYPE, track.url)] ) {
-			tracks[generateNodeId(TRACK_TYPE, track.url)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
-		} else {
-			var trackNode = TrackNode({
-				id: track.url,
-				name: track.name,
-				loved: track.loved,
-				mbid: track.mbid,
-				streamable: track.streamable,
-				url: track.url,
-				image: transformText(track.image),
-				playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
-				artist___NODE: generateNodeId(ARTIST_TYPE, track.artist.url),
-				album___NODE: generateNodeId(ALBUM_TYPE, albumUrl),
-			})
-			tracks[generateNodeId(TRACK_TYPE, track.url)] = trackNode
-		}
-
-		// CHECK ARTIST NODE
-		if( artists[generateNodeId(ARTIST_TYPE, track.artist.url)]) {
-			artists[generateNodeId(ARTIST_TYPE, track.artist.url)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
-			// If track not linked to artist yet, link
-			if(artists[generateNodeId(ARTIST_TYPE, track.artist.url)].tracks___NODE.indexOf(generateNodeId(TRACK_TYPE, track.url)) < 0) {
-				artists[generateNodeId(ARTIST_TYPE, track.artist.url)].tracks___NODE.push(generateNodeId(TRACK_TYPE, track.url))
+		if(track.date) {
+			const albumUrl = track.artist.url + '/' + encodeURIComponent(track.album['#text'].replace(/ /g, '+'))
+			// CHECK TRACK NODE
+			if( tracks[generateNodeId(TRACK_TYPE, track.url)] ) {
+				tracks[generateNodeId(TRACK_TYPE, track.url)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
+			} else {
+				var trackNode = TrackNode({
+					id: track.url,
+					name: track.name,
+					loved: track.loved,
+					mbid: track.mbid,
+					streamable: track.streamable,
+					url: track.url,
+					image: transformText(track.image),
+					playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
+					artist___NODE: generateNodeId(ARTIST_TYPE, track.artist.url),
+					album___NODE: generateNodeId(ALBUM_TYPE, albumUrl),
+				})
+				tracks[generateNodeId(TRACK_TYPE, track.url)] = trackNode
 			}
-		} else {
-			var artistNode = ArtistNode({
-				id: track.artist.url,
-				name: track.artist.name,
-				mbid: track.artist.mbid,
-				image: transformText(track.artist.image),
-				playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
-				albums___NODE: [generateNodeId(ALBUM_TYPE, albumUrl)],
-				tracks___NODE: [generateNodeId(TRACK_TYPE, track.url)]
-			})
-			artists[generateNodeId(ARTIST_TYPE, track.artist.url)] = artistNode
-		}
 
-		// CHECK ALBUM NODE
-		if( albums[generateNodeId(ALBUM_TYPE, albumUrl)] ) {
-			albums[generateNodeId(ALBUM_TYPE, albumUrl)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
-			// if track not linked to album yet, link
-			if(albums[generateNodeId(ALBUM_TYPE, albumUrl)].tracks___NODE.indexOf(generateNodeId(TRACK_TYPE, track.url)) < 0) {
-				albums[generateNodeId(ALBUM_TYPE, albumUrl)].tracks___NODE.push(generateNodeId(TRACK_TYPE, track.url))
+			// CHECK ARTIST NODE
+			if( artists[generateNodeId(ARTIST_TYPE, track.artist.url)]) {
+				artists[generateNodeId(ARTIST_TYPE, track.artist.url)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
+				// If track not linked to artist yet, link
+				if(artists[generateNodeId(ARTIST_TYPE, track.artist.url)].tracks___NODE.indexOf(generateNodeId(TRACK_TYPE, track.url)) < 0) {
+					artists[generateNodeId(ARTIST_TYPE, track.artist.url)].tracks___NODE.push(generateNodeId(TRACK_TYPE, track.url))
+				}
+			} else {
+				var artistNode = ArtistNode({
+					id: track.artist.url,
+					name: track.artist.name,
+					mbid: track.artist.mbid,
+					image: transformText(track.artist.image),
+					playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
+					albums___NODE: [generateNodeId(ALBUM_TYPE, albumUrl)],
+					tracks___NODE: [generateNodeId(TRACK_TYPE, track.url)]
+				})
+				artists[generateNodeId(ARTIST_TYPE, track.artist.url)] = artistNode
 			}
-		} else {
-			var albumNode = AlbumNode({
-				id: albumUrl,
-				name: track.album['#text'],
-				mbid: track.album.mbid,
-				playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
-				artist___NODE: generateNodeId(ARTIST_TYPE, track.artist.url),
-				tracks___NODE: [generateNodeId(TRACK_TYPE, track.url)]
-			})
-			albums[generateNodeId(ALBUM_TYPE, albumUrl)] = albumNode
-		}
 
-		const playbackNode = PlaybackNode({
-			id: track.date.uts, 
-			date: transformText([track.date])[0],
-			track___NODE: generateNodeId(TRACK_TYPE, track.url)
-		})
-		playbacks.push(playbackNode)
+			// CHECK ALBUM NODE
+			if( albums[generateNodeId(ALBUM_TYPE, albumUrl)] ) {
+				albums[generateNodeId(ALBUM_TYPE, albumUrl)].playbacks___NODE.push(generateNodeId(PLAYBACK_TYPE, track.date.uts))
+				// if track not linked to album yet, link
+				if(albums[generateNodeId(ALBUM_TYPE, albumUrl)].tracks___NODE.indexOf(generateNodeId(TRACK_TYPE, track.url)) < 0) {
+					albums[generateNodeId(ALBUM_TYPE, albumUrl)].tracks___NODE.push(generateNodeId(TRACK_TYPE, track.url))
+				}
+			} else {
+				var albumNode = AlbumNode({
+					id: albumUrl,
+					name: track.album['#text'],
+					mbid: track.album.mbid,
+					playbacks___NODE: [generateNodeId(PLAYBACK_TYPE, track.date.uts)],
+					artist___NODE: generateNodeId(ARTIST_TYPE, track.artist.url),
+					tracks___NODE: [generateNodeId(TRACK_TYPE, track.url)]
+				})
+				albums[generateNodeId(ALBUM_TYPE, albumUrl)] = albumNode
+			}
+
+			const playbackNode = PlaybackNode({
+				id: track.date.uts, 
+				date: transformText([track.date])[0],
+				track___NODE: generateNodeId(TRACK_TYPE, track.url)
+			})
+			playbacks.push(playbackNode)
+		}
 	})
 
 	//console.log(Object.keys(tracks).length + " Tracks")
