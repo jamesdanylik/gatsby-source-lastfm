@@ -140,7 +140,7 @@ exports.sourceNodes = async({boundActionCreators}, {
 
 		console.log(response.recenttracks['@attr'])
 		if((response.recenttracks['@attr'].totalPages == currentPage) ||
-			(currentPage * response.recenttracks['@attr'].perPage > limit)) {
+			(currentPage * response.recenttracks['@attr'].perPage >= limit)) {
 			fetchDone = true
 			console.log("Fetch Done")
 		} else {
