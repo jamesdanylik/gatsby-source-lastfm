@@ -22,15 +22,15 @@ npm install --save gatsby-source-lastfm
 ```javascript
 // In your gatsby-config.js
 plugins: [
-	{
-	      resolve: "gatsby-source-lastfm",
-	      options: {
-	        api_key: '<<YOUR API KEY HERE>>',
-	        username: '<<USERNAME TO TRACK>>',
+  {
+        resolve: "gatsby-source-lastfm",
+        options: {
+          api_key: '<<YOUR API KEY HERE>>',
+          username: '<<USERNAME TO TRACK>>',
           limit: 200, // the maximum number of playbacks to pull in
-	      },
-	},
-	...
+        },
+  },
+  ...
 ]
 ```
 
@@ -42,10 +42,10 @@ plugins: [
     edges {
       node {
         id
-  		date {
-  		  uts
-  		  text
-  		}
+      date {
+        uts
+        text
+      }
         track {
           id
           # linked track node here
