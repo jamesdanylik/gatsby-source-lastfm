@@ -138,14 +138,16 @@ exports.sourceNodes = async({boundActionCreators}, {
 			}
 		})
 
-		console.log(response.recenttracks['@attr'])
+		//console.log(response.recenttracks['@attr'])
 		if((response.recenttracks['@attr'].totalPages == currentPage) ||
 			(currentPage * response.recenttracks['@attr'].perPage >= limit)) {
 			fetchDone = true
-			console.log("Fetch Done")
+			//console.log("Fetch Done")
 		} else {
 			currentPage = currentPage + 1
-			console.log("getting page " + currentPage)
+			//console.log("getting page " + currentPage)
+			var waitTill = new Date(new Date().getTime() + 500)
+			while(waitTill > new Date()) {}
 		}
 	}
 
@@ -164,7 +166,7 @@ exports.sourceNodes = async({boundActionCreators}, {
 		createNode(artists[key])
 	}
 
-	console.log(playbacks.length + " Playbacks")
+	//console.log(playbacks.length + " Playbacks")
 	playbacks.forEach(playback => {
 		createNode(playback)
 	})

@@ -4,10 +4,12 @@
 [![npm package](https://img.shields.io/npm/v/gatsby-source-lastfm.svg)](https://www.npmjs.org/package/gatsby-source-lastfm)
 [![npm package](https://img.shields.io/npm/dm/gatsby-source-lastfm.svg)](https://npmcharts.com/compare/gatsby-source-lastfm?minimal=true)
 
-This is a source plugin for GatsbyJS to pull information from Last.FM.  Currently, the plugin grabs only the most recent 200 scrobbles for a single Last.fm user. Grabbing more / all scrobbles for a user is currently a work-in-progress; other features added by request.
+This is a source plugin for GatsbyJS to pull information from Last.FM.  It will pull in playbacks and associated information for a user into GraphQL, preserving all links as expected.  The plugin will grab up until the limit set in its configuration; if no limit is set, it will grab all a user's scrobbles.  Note that this could take a **LONG** time -- for 100,000 scrobbles, this equates to about 9 hours to build my site.  In short, including everything could make your build take all day.
 
 ## A Word on Tests
 This plugin is setup for continuous deployment with Travis-CL for testing.  However, I'm still learning the proper way to unit tests GatsbyJS plugins, so my testing mainly focuses on the API side at the moment: we pull from the API, verify the structure hasn't changed, and verify that we parse correctly.  Currently, it is assumed that the GatsbyJS plugin structure hasn't changed; this isn't tested by the suite.
+
+success source and transform nodes — 17794.957 s
 
 ## Install
 
