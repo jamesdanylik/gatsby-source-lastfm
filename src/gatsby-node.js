@@ -68,6 +68,12 @@ exports.sourceNodes = async({boundActionCreators}, {
 
 		response = await api(recentTracksUrl({api_key: api_key, username: username, extended: 1, limit: 200, page: currentPage}))
 
+		if(!response.hasOwnProperty('recenttracks')) {
+			//console.log("Last.FM returned an  invalid response. Check API key and Last.FM shard status.")
+			fetchDone = true;
+			return
+		}
+
 		response.recenttracks.track.forEach(track => {
 			if(track.date) {
 				const albumUrl = track.artist.url + '/' + encodeURIComponent(track.album['#text'].replace(/ /g, '+'))
