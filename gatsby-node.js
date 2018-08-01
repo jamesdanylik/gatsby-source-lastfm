@@ -47,6 +47,19 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 			})
 	}
 
+	const extractImages = (orig) => {
+	  var trans = []
+	  for( var index in orig) {
+	    var item = {}
+	    for( var key in orig[index] ) {
+	      if (key === "#text") { item["text"] = orig[index][key] }
+	      else { item[key] = orig[index][key] }
+	    }
+            trans.push(item)
+	  }
+	  return trans
+	}
+
 	// The actual plugin routine
 	return new Promise( async (resolve, reject) => {
 		var tracks = {}
@@ -111,6 +124,7 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 						mbid: track.mbid,
 						streamable: track.streamable,
 						url: track.url,
+						image: extractImages(track.image),
 						playbacks___NODE: [playbackNodeId],
 						artist___NODE: artistNodeId,
 						album___NODE: albumNodeId
@@ -127,6 +141,7 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 						name: track.artist.name,
 						mbid: track.artist.mbid,
 						url: track.artist.url,
+						image: extractImages(track.artist.image),
 						playbacks___NODE: [playbackNodeId],
 						albums___NODE: [albumNodeId],
 						tracks___NODE: [trackNodeId]
