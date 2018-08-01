@@ -126,6 +126,7 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 						typeName: "LastfmArtist",
 						name: track.artist.name,
 						mbid: track.artist.mbid,
+						url: track.artist.url,
 						playbacks___NODE: [playbackNodeId],
 						albums___NODE: [albumNodeId],
 						tracks___NODE: [trackNodeId]
@@ -139,11 +140,13 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 
 				// Album Node
 				if( !albums[albumNodeId] ) {
+					const albumUrl = track.artist.url + '/' + encodeURIComponent(track.album['#text'].replace(/ /g, '+'))
 					albums[albumNodeId] = {
 						id: albumNodeId,
 						typeName: "LastfmAlbum",
 						name: track.album["#text"],
 						mbid: track.album.mbid,
+						url: albumUrl,
 						playbacks___NODE: [playbackNodeId],
 						artist___NODE: artistNodeId,
 						tracks___NODE: [trackNodeId]
