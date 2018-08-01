@@ -1,6 +1,6 @@
 {
 	"name": "gatsby-source-lastfm",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A GatsbyJS source plugin for building websites using Last.FM",
 	"main": "index.js",
 	"scripts": {
