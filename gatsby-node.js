@@ -65,7 +65,7 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 		var tracks = {}
 		var artists = {}
 		var albums = {}
-		var playbacks = []
+		var playbacks = {}
 
 		var pageNum = 1
 		var reponse
@@ -76,7 +76,8 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 			configOptions.limit = 1000
 		}
 
-		while (playbacks.length < numWanted) {	
+	  while (Object.keys(playbacks).length < numWanted) {	
+
 			// Get one page of API response, using configOptions + roundOptions
 			const roundOptions = {
 				method: "user.getrecenttracks",
@@ -174,12 +175,12 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 				}
 
 				// Create Playback Node
-				playbacks.push({
+				playbacks[playbackNodeId] = {
 					id: playbackNodeId,
 					typeName: "LastfmPlayback",
 					date: track.date.uts,
 					track___NODE: trackNodeId,
-				})				
+				}
 			})
 
 			// Respect API rate limiting
@@ -188,11 +189,6 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 
 			// Ready parameters for next page
 			pageNum += 1
-			const numRemaining = numWanted - playbacks.length
-			if(numRemaining < configOptions.limit) {
-				configOptions.limit = numRemaining
-			}
-
 		}
 
 		// Done collecting nodes; time to pass them to GatsbyJS
@@ -212,7 +208,8 @@ exports.sourceNodes = ({ actions, createNodeId}, configOptions) => {
 		processNode({
     	id: createNodeId(`lastfm-meta-1`),
       typeName: "LastfmMeta",
-      total_playbacks: response.recenttracks["@attr"].total
+		  total_playbacks: response.recenttracks["@attr"].total,
+		  total_added: playbacks.length
    	})
 
 		// We're done!
